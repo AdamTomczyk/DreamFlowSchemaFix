@@ -1,0 +1,7 @@
+<h1><%= @dream.name %>' details</h1>
+
+<% @dream.qas.each do |qa| %>
+    <h2><%= qa.question %></h2>
+<% end %>
+
+<%= link_to "Answer Dream Question", dream_qas_path(@dream) %>

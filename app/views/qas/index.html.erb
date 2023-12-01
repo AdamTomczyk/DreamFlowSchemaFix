@@ -1,0 +1,22 @@
+<div class="mt-5"></div>
+<% @qas.each do |qa| %>
+  <div class="mb-5">
+    <h2><%= qa.question %></h2>
+    <% if  qa.edit_mode || qa.answer.nil? %>
+      <%= simple_form_for([@dream,qa], method: :patch, remote: true) do |f|  %>
+          <%= f.input :answer %>
+          <% if qa.answer.nil? %>
+            <%= f.submit "Give anwser", class: "btn btn-success" %>
+            <% elsif qa.edit_mode  %>
+            <%= f.submit "Update", class: "btn btn-warning" %>
+          <% end %>
+      <% end %>
+      <% else %>
+    <h4><%= qa.answer %></h4>
+
+    <%= link_to "Edit Answer 👾", edit_mode_dream_qa_path(@dream, qa), data: {turbo_method: :patch} %>
+
+    <% end %>
+  </div>
+
+<% end %>
